@@ -20,12 +20,13 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
 
-    # Force a fresh clean build with Gradle 8.2
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
-        gradle-version: 8.2
-        arguments: clean assembleDebug --stacktrace
+        arguments: clean assembleDebug --stacktrace --info
 
     - name: Upload APK
       uses: actions/upload-artifact@v3
