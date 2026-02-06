@@ -20,19 +20,23 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
 
-    - name: Install NDK and CMake
+    # Install NDK explicitly
+    - name: Install NDK
       run: sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1"
 
-    # Use gradle-build-action to handle Gradle setup and execution securely
-    # This action automatically handles the wrapper missing issue by using a specific version
+    # Create local.properties to explicitly point to SDK and NDK
+    - name: Create local.properties
+      run: |
+        echo "sdk.dir=$ANDROID_HOME" > local.properties
+        echo "ndk.dir=$ANDROID_HOME/ndk/25.1.8937393" >> local.properties
+
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: 8.2
-        arguments: assembleDebug --stacktrace --scan
+        arguments: assembleDebug --stacktrace
       env:
-        # Explicitly point to the NDK we just installed
-        ANDROID_NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/25.1.8937393
+         ANDROID_NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/25.1.8937393
 
     - name: Upload APK
       uses: actions/upload-artifact@v3
