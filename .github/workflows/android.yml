@@ -20,23 +20,13 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
 
-    # Install NDK explicitly
-    - name: Install NDK
-      run: sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1"
-
-    # Create local.properties to explicitly point to SDK and NDK
-    - name: Create local.properties
-      run: |
-        echo "sdk.dir=$ANDROID_HOME" > local.properties
-        echo "ndk.dir=$ANDROID_HOME/ndk/25.1.8937393" >> local.properties
-
+    # REMOVED NDK INSTALLATION - Pure Kotlin Build
+    
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: 8.2
         arguments: assembleDebug --stacktrace
-      env:
-         ANDROID_NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/25.1.8937393
 
     - name: Upload APK
       uses: actions/upload-artifact@v3
