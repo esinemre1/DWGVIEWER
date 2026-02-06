@@ -25,18 +25,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-             // Disable minification for debug to avoid build errors
             minifyEnabled false
         }
     }
     
-    // CRITICALLY IMPORTANT FOR CI: Do not fail on lint errors
-    lintOptions {
-        abortOnError false
-        checkReleaseBuilds false
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     
-    // Explicitly define C++ build
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
@@ -47,10 +48,14 @@ android {
     buildFeatures {
         viewBinding true
     }
+    
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.material:material:1.9.0'
