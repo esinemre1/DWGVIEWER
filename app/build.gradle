@@ -31,8 +31,8 @@ android {
     buildFeatures {
         viewBinding true
     }
-    lintOptions {
-        abortOnError false
+    lint {
+        abortOnError = false
     }
 }
 
