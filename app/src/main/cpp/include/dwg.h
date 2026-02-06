@@ -11,6 +11,8 @@ extern "C" {
 
 #define DWG_TYPE_LINE 1
 #define DWG_TYPE_LWPOLYLINE 2
+#define DWG_TYPE_TEXT 3
+#define DWG_TYPE_POINT 4
 
 typedef struct _dwg_point_3d {
   double x;
@@ -27,15 +29,6 @@ typedef struct _dwg_layer {
   char *name;
 } Dwg_Layer;
 
-typedef struct _dwg_entity_base {
-  int color;
-  Dwg_Layer *layer;
-  union {
-    struct _dwg_entity_LINE *LINE;
-    struct _dwg_entity_LWPOLYLINE *LWPOLYLINE;
-  } tio;
-} Dwg_Entity_BASE;
-
 typedef struct _dwg_entity_LINE {
   Dwg_Point_3D start;
   Dwg_Point_3D end;
@@ -45,6 +38,28 @@ typedef struct _dwg_entity_LWPOLYLINE {
   int num_points;
   Dwg_Point_2D *points;
 } Dwg_Entity_LWPOLYLINE;
+
+typedef struct _dwg_entity_TEXT {
+  Dwg_Point_3D ins_pt;
+  double height;
+  char *text_value;
+  double rotation;
+} Dwg_Entity_TEXT;
+
+typedef struct _dwg_entity_POINT {
+  Dwg_Point_3D point;
+} Dwg_Entity_POINT;
+
+typedef struct _dwg_entity_base {
+  int color;
+  Dwg_Layer *layer;
+  union {
+    struct _dwg_entity_LINE *LINE;
+    struct _dwg_entity_LWPOLYLINE *LWPOLYLINE;
+    struct _dwg_entity_TEXT *TEXT;
+    struct _dwg_entity_POINT *POINT;
+  } tio;
+} Dwg_Entity_BASE;
 
 typedef struct _dwg_object {
   int fixedtype;
