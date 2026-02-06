@@ -12,14 +12,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
-        // Maps logic commented out to match dependencies
-        // setupMap()
     }
-    
-    /*
-    private fun setupMap() {
-        ...
-    }
-    */
 }
