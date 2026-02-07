@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
 }
 
 android {
@@ -29,8 +29,6 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-    // ViewBinding REMOVED to simplify build
-    // Lint disabled
     lint {
         abortOnError = false
     }

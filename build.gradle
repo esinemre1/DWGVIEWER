@@ -1,7 +1,14 @@
-// Top-level build file
-plugins {
-    id 'com.android.application' version '8.1.1' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
+// Old-school robust build.gradle
+buildscript {
+    ext.kotlin_version = '1.8.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
 
 task clean(type: Delete) {

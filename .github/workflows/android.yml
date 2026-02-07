@@ -1,4 +1,4 @@
-name: Android Build Final Fix
+name: Android Build
 
 on:
   push:
@@ -17,11 +17,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     
-    # Accept SDK licenses explicitly before building
-    - name: Accept Android Licenses
-      run: |
-        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
-    
+    # Use Gradle 8.0 which works well with AGP 8.1
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
