@@ -1,4 +1,4 @@
-name: Android Build
+name: Android Factory Reset Build
 
 on:
   push:
@@ -17,7 +17,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     
-    # Use Gradle 8.0 which works well with AGP 8.1
+    # Use official Setup-Gradle action. 
+    # It handles wrapper validation, distribution download, and caching.
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
