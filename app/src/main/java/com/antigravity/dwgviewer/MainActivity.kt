@@ -2,15 +2,15 @@ package com.antigravity.dwgviewer
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.antigravity.dwgviewer.databinding.ActivityMainBinding
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
+        
+        // Simple functional check
+        findViewById<TextView>(R.id.hello_text).text = "Build Success!"
     }
 }
